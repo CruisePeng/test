@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.vip.dao.CatagoryMapper">
+  <resultMap id="BaseResultMap" type="com.vote.vip.bean.Catagory">
+    <result column="catagory_id" jdbcType="VARCHAR" property="catagoryId" />
+    <result column="catagory_name" jdbcType="VARCHAR" property="catagoryName" />
+    <result column="catagory_desc" jdbcType="VARCHAR" property="catagoryDesc" />
+    <result column="catagory_order" jdbcType="INTEGER" property="catagoryOrder" />
+  </resultMap>
+  <insert id="insert" parameterType="com.vote.vip.bean.Catagory">
+    insert into t_catagory (catagory_id, catagory_name, catagory_desc, 
+      catagory_order)
+    values (#{catagoryId,jdbcType=VARCHAR}, #{catagoryName,jdbcType=VARCHAR}, #{catagoryDesc,jdbcType=VARCHAR}, 
+      #{catagoryOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.vip.bean.Catagory">
+    insert into t_catagory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="catagoryId != null">
+        catagory_id,
+      </if>
+      <if test="catagoryName != null">
+        catagory_name,
+      </if>
+      <if test="catagoryDesc != null">
+        catagory_desc,
+      </if>
+      <if test="catagoryOrder != null">
+        catagory_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="catagoryId != null">
+        #{catagoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="catagoryName != null">
+        #{catagoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="catagoryDesc != null">
+        #{catagoryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="catagoryOrder != null">
+        #{catagoryOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.vip.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.vote.vip.bean.Message">
+    <result column="message_id" jdbcType="VARCHAR" property="messageId" />
+    <result column="message_targetId" jdbcType="VARCHAR" property="messageTargetid" />
+    <result column="message_isRead" jdbcType="CHAR" property="messageIsread" />
+    <result column="message_readTime" jdbcType="TIMESTAMP" property="messageReadtime" />
+    <result column="message_readIP" jdbcType="VARCHAR" property="messageReadip" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.vote.vip.bean.Message">
+    <result column="message_content" jdbcType="LONGVARCHAR" property="messageContent" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    message_content
+  </sql>
+  <insert id="insert" parameterType="com.vote.vip.bean.Message">
+    insert into t_message (message_id, message_targetId, message_isRead, 
+      message_readTime, message_readIP, message_content
+      )
+    values (#{messageId,jdbcType=VARCHAR}, #{messageTargetid,jdbcType=VARCHAR}, #{messageIsread,jdbcType=CHAR}, 
+      #{messageReadtime,jdbcType=TIMESTAMP}, #{messageReadip,jdbcType=VARCHAR}, #{messageContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.vip.bean.Message">
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="messageTargetid != null">
+        message_targetId,
+      </if>
+      <if test="messageIsread != null">
+        message_isRead,
+      </if>
+      <if test="messageReadtime != null">
+        message_readTime,
+      </if>
+      <if test="messageReadip != null">
+        message_readIP,
+      </if>
+      <if test="messageContent != null">
+        message_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTargetid != null">
+        #{messageTargetid,jdbcType=VARCHAR},
+      </if>
+      <if test="messageIsread != null">
+        #{messageIsread,jdbcType=CHAR},
+      </if>
+      <if test="messageReadtime != null">
+        #{messageReadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageReadip != null">
+        #{messageReadip,jdbcType=VARCHAR},
+      </if>
+      <if test="messageContent != null">
+        #{messageContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

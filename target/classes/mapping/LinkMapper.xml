@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.vip.dao.LinkMapper">
+  <resultMap id="BaseResultMap" type="com.vote.vip.bean.Link">
+    <result column="link_id" jdbcType="VARCHAR" property="linkId" />
+    <result column="link_name" jdbcType="VARCHAR" property="linkName" />
+    <result column="link_url" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="link_logoUrl" jdbcType="VARCHAR" property="linkLogourl" />
+    <result column="link_order" jdbcType="INTEGER" property="linkOrder" />
+  </resultMap>
+  <insert id="insert" parameterType="com.vote.vip.bean.Link">
+    insert into t_link (link_id, link_name, link_url, 
+      link_logoUrl, link_order)
+    values (#{linkId,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR}, 
+      #{linkLogourl,jdbcType=VARCHAR}, #{linkOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.vip.bean.Link">
+    insert into t_link
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="linkId != null">
+        link_id,
+      </if>
+      <if test="linkName != null">
+        link_name,
+      </if>
+      <if test="linkUrl != null">
+        link_url,
+      </if>
+      <if test="linkLogourl != null">
+        link_logoUrl,
+      </if>
+      <if test="linkOrder != null">
+        link_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="linkId != null">
+        #{linkId,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null">
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkLogourl != null">
+        #{linkLogourl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkOrder != null">
+        #{linkOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.vip.dao.TopicMapper">
+  <resultMap id="BaseResultMap" type="com.vote.vip.bean.Topic">
+    <result column="topic_id" jdbcType="VARCHAR" property="topicId" />
+    <result column="topic_title" jdbcType="VARCHAR" property="topicTitle" />
+    <result column="topic_categoryId" jdbcType="VARCHAR" property="topicCategoryid" />
+    <result column="topic_ispwd" jdbcType="CHAR" property="topicIspwd" />
+    <result column="topic_password" jdbcType="VARCHAR" property="topicPassword" />
+    <result column="topic_resultId" jdbcType="VARCHAR" property="topicResultid" />
+    <result column="topic_expiredTime" jdbcType="TIMESTAMP" property="topicExpiredtime" />
+    <result column="topic_checkStatus" jdbcType="CHAR" property="topicCheckstatus" />
+    <result column="topic_publishTime" jdbcType="TIMESTAMP" property="topicPublishtime" />
+    <result column="topic_view" jdbcType="INTEGER" property="topicView" />
+    <result column="topic_userId" jdbcType="VARCHAR" property="topicUserid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.vote.vip.bean.TopicWithBLOBs">
+    <result column="topic_content" jdbcType="LONGVARCHAR" property="topicContent" />
+    <result column="topic_preCondition" jdbcType="LONGVARCHAR" property="topicPrecondition" />
+    <result column="topic_option" jdbcType="LONGVARCHAR" property="topicOption" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    topic_content, topic_preCondition, topic_option
+  </sql>
+  <insert id="insert" parameterType="com.vote.vip.bean.TopicWithBLOBs">
+    insert into t_topic (topic_id, topic_title, topic_categoryId, 
+      topic_ispwd, topic_password, topic_resultId, 
+      topic_expiredTime, topic_checkStatus, topic_publishTime, 
+      topic_view, topic_userId, topic_content, 
+      topic_preCondition, topic_option)
+    values (#{topicId,jdbcType=VARCHAR}, #{topicTitle,jdbcType=VARCHAR}, #{topicCategoryid,jdbcType=VARCHAR}, 
+      #{topicIspwd,jdbcType=CHAR}, #{topicPassword,jdbcType=VARCHAR}, #{topicResultid,jdbcType=VARCHAR}, 
+      #{topicExpiredtime,jdbcType=TIMESTAMP}, #{topicCheckstatus,jdbcType=CHAR}, #{topicPublishtime,jdbcType=TIMESTAMP}, 
+      #{topicView,jdbcType=INTEGER}, #{topicUserid,jdbcType=VARCHAR}, #{topicContent,jdbcType=LONGVARCHAR}, 
+      #{topicPrecondition,jdbcType=LONGVARCHAR}, #{topicOption,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.vote.vip.bean.TopicWithBLOBs">
+    insert into t_topic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="topicId != null">
+        topic_id,
+      </if>
+      <if test="topicTitle != null">
+        topic_title,
+      </if>
+      <if test="topicCategoryid != null">
+        topic_categoryId,
+      </if>
+      <if test="topicIspwd != null">
+        topic_ispwd,
+      </if>
+      <if test="topicPassword != null">
+        topic_password,
+      </if>
+      <if test="topicResultid != null">
+        topic_resultId,
+      </if>
+      <if test="topicExpiredtime != null">
+        topic_expiredTime,
+      </if>
+      <if test="topicCheckstatus != null">
+        topic_checkStatus,
+      </if>
+      <if test="topicPublishtime != null">
+        topic_publishTime,
+      </if>
+      <if test="topicView != null">
+        topic_view,
+      </if>
+      <if test="topicUserid != null">
+        topic_userId,
+      </if>
+      <if test="topicContent != null">
+        topic_content,
+      </if>
+      <if test="topicPrecondition != null">
+        topic_preCondition,
+      </if>
+      <if test="topicOption != null">
+        topic_option,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="topicId != null">
+        #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="topicTitle != null">
+        #{topicTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="topicCategoryid != null">
+        #{topicCategoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="topicIspwd != null">
+        #{topicIspwd,jdbcType=CHAR},
+      </if>
+      <if test="topicPassword != null">
+        #{topicPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="topicResultid != null">
+        #{topicResultid,jdbcType=VARCHAR},
+      </if>
+      <if test="topicExpiredtime != null">
+        #{topicExpiredtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicCheckstatus != null">
+        #{topicCheckstatus,jdbcType=CHAR},
+      </if>
+      <if test="topicPublishtime != null">
+        #{topicPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicView != null">
+        #{topicView,jdbcType=INTEGER},
+      </if>
+      <if test="topicUserid != null">
+        #{topicUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="topicContent != null">
+        #{topicContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicPrecondition != null">
+        #{topicPrecondition,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="topicOption != null">
+        #{topicOption,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
